@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestão de Cursos | Casa do Importador</title>
+<link rel="stylesheet" href="style.css">
+</head><body><header>
+    <div class="logo">CASA DO IMPORTADOR</div>
+</header><section class="hero">
+    <h1>Gestão de Cursos</h1>
+    <p>Crie, organize e acompanhe os cursos da plataforma.</p>
+</section><section class="section"><div class="card">
+    <h2>Adicionar novo curso</h2>
+    <p>A área de criação será ligada à base de dados na próxima etapa.</p>
+
+    <form id="cursoForm">
+
+        <label for="titulo">Título do curso</label>
+        <input type="text" id="titulo" required>
+
+        <label for="slug">Identificador do curso (Slug)</label>
+        <input type="text" id="slug" required>
+
+        <label for="descricaoBreve">Descrição breve</label>
+        <textarea id="descricaoBreve" required></textarea>
+
+        <label for="descricao">Descrição completa</label>
+        <textarea id="descricao" rows="5"></textarea>
+
+        <label for="imagem">URL da imagem de capa</label>
+        <input type="url" id="imagem">
+
+        <label for="preco">Preço em MZN</label>
+        <input type="number" id="preco" min="0" required>
+
+        <label for="categoria">ID da categoria</label>
+        <input type="text" id="categoria">
+
+        <button type="button" class="btn" disabled>
+            Guardar curso (em preparação)
+        </button>
+
+    </form>
+</div>
+
+<div class="card">
+    <h2>Cursos existentes</h2>
+    <p>Lista de cursos registados na plataforma.</p>
+
+    <div id="listaCursos">
+        A carregar cursos...
+    </div>
+</div>
+
+<a href="admin.html" class="btn">Voltar ao painel administrativo</a>
+
+</section><footer>
+    <p>Casa do Importador © 2026</p>
+</footer><script type="module">
+
+import { supabase } from './supabase.js';
+
+const listaCursos = document.getElementById('listaCursos');
+
+async function iniciarGestao() {
+
+    const { data: sessao, error: erroSessao } =
+        await supabase.auth.getSession();
+
+    if (erroSessao || !sessao.session) {
+        window.location.replace('login.html');
+        return;
+    }
+
+    const { data: perfil, error: erroPerfil } = await supabase
+        .from('perfis')
+        .select('papel')
+        .eq('id', sessao.session.user.id)
+        .single();
+
+    if (erroPerfil || !perfil ||
+        !['admin', 'administrador'].includes(perfil.papel)) {
+
+        window.location.replace('aluno.html');
+        return;
+    }
+
+    carregarCursos();
+}
+
+async function carregarCursos() {
+
+    listaCursos.textContent = 'A carregar cursos...';
+
+    const { data, error } = await supabase
+        .from('cursos')
+        .select('*')
+        .limit(100);
+
+    if (error) {
+        listaCursos.textContent =
+            'Não foi possível carregar os cursos: ' + error.message;
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        listaCursos.textContent = 'Ainda não existem cursos registados.';
+        return;
+    }
+
+    listaCursos.innerHTML = '';
+
+    data.forEach(curso => {
+
+        const cartao = document.createElement('div');
+        cartao.className = 'card';
+
+        const titulo = document.createElement('h3');
+        titulo.textContent = curso.titulo || 'Curso sem título';
+
+        const descricao = document.createElement('p');
+        descricao.textContent =
+            curso.descricao_breve || 'Sem descrição disponível.';
+
+        const preco = document.createElement('p');
+        preco.textContent =
+            'Preço: ' + (curso.preco_mzn ?? 'Não definido') + ' MZN';
+
+        cartao.append(titulo, descricao, preco);
+        listaCursos.appendChild(cartao);
+
+    });
+
+}
+
+iniciarGestao();
+
+</script></body>
+</html>
