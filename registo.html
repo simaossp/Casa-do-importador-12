@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta | Casa do Importador</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="auth-container">
+        <h1>Casa do Importador</h1>
+        <h2>Criar conta de aluno</h2>
+        <p>Preenche os teus dados para te juntares à nossa plataforma.</p>
+
+        <form id="registoForm">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" placeholder="O teu nome completo" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="O teu e-mail" required>
+
+            <label for="password">Palavra-passe</label>
+            <input type="password" id="password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
+
+            <button type="submit" id="btnRegistar">Criar conta</button>
+        </form>
+
+        <p id="mensagem"></p>
+
+        <p>Já tens uma conta?
+            <a href="login.html">Iniciar sessão</a>
+        </p>
+
+        <a href="index.html">Voltar à página inicial</a>
+    </main>
+
+    <script type="module">
+        import { supabase } from './supabase.js';
+
+        const formulario = document.getElementById('registoForm');
+        const mensagem = document.getElementById('mensagem');
+        const botao = document.getElementById('btnRegistar');
+
+        formulario.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            mensagem.textContent = 'A criar a tua conta...';
+            botao.disabled = true;
+
+            try {
+                const { data, error } = await const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+        emailRedirectTo: window.location.origin,
+        data: {
+            nome_completo: nome
+        }
+    }
+});
+
+                if (error) throw error;
+
+                mensagem.textContent = data.session
+                    ? 'Conta criada com sucesso! Já podes iniciar sessão.'
+                    : 'Conta criada! Verifica o teu e-mail para confirmar o registo.';
+
+                formulario.reset();
+
+            } catch (error) {
+                mensagem.textContent = 'Erro: ' + error.message;
+            } finally {
+                botao.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>

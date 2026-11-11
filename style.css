@@ -1,0 +1,305 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f7f5;
+    color: #172b24;
+}
+
+header {
+    background: #102b24;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+#menuBtn {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 26px;
+}
+
+nav {
+    display: none;
+    background: #173e31;
+    padding: 15px;
+}
+
+nav.active {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: linear-gradient(135deg, #102b24, #267650);
+    color: white;
+    text-align: center;
+    padding: 75px 22px;
+}
+
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.btn {
+    display: inline-block;
+    background: #e9b949;
+    color: #102b24;
+    padding: 13px 22px;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.section {
+    padding: 40px 20px;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+.card h3 {
+    color: #216b4d;
+    margin-bottom: 12px;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.about {
+    background: #e7eee9;
+    text-align: center;
+    line-height: 1.8;
+}
+
+footer {
+    background: #102b24;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    line-height: 2;
+}input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+}
+
+form .btn {
+    width: 100%;
+    cursor: pointer;
+}/* FORMULÁRIO DE REGISTO - CASA DO IMPORTADOR */
+
+.auth-container {
+    width: 90%;
+    max-width: 430px;
+    margin: 55px auto;
+    padding: 35px 25px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+    box-sizing: border-box;
+}
+
+body {
+    background: #f3f6fa;
+    font-family: Arial, sans-serif;
+    color: #1d2939;
+}
+
+.auth-container h1 {
+    text-align: center;
+    color: #087443;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.auth-container h2 {
+    text-align: center;
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.auth-container p {
+    text-align: center;
+    color: #667085;
+    line-height: 1.6;
+}
+
+.auth-container label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    box-sizing: border-box;
+    font-size: 15px;
+    outline: none;
+}
+
+.auth-container input:focus {
+    border-color: #087443;
+    box-shadow: 0 0 0 3px rgba(8,116,67,0.10);
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    background: #087443;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-container button:disabled {
+    opacity: 0.6;
+}
+
+.auth-container a {
+    color: #087443;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#mensagem {
+    margin-top: 15px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}/* IDENTIDADE VISUAL CASA DO IMPORTADOR */
+
+:root {
+    --verde: #087443;
+    --verde-escuro: #065a34;
+    --dourado: #e9ad35;
+    --fundo: #f4f7f5;
+    --texto: #202b25;
+    --branco: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--verde);
+    color: var(--branco);
+    padding: 18px 5%;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+nav a {
+    color: var(--branco);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: var(--dourado);
+}
+
+button, .btn {
+    background: var(--verde);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover, .btn:hover {
+    background: var(--verde-escuro);
+}
+
+.card, .course-card {
+    background: var(--branco);
+    border-radius: 14px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+footer {
+    background: var(--verde-escuro);
+    color: var(--branco);
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+}
+
+a {
+    transition: 0.2s;
+}
+
+input, select, textarea {
+    font-family: Arial, sans-serif;
+}
